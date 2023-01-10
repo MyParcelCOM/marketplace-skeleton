@@ -7,12 +7,12 @@ namespace App\Providers;
 use App\Authentication\Domain\AuthorizationSession;
 use App\Authentication\Domain\AuthServer;
 use App\Authentication\Domain\AuthServerInterface;
+use App\Exceptions\ExceptionHandler;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler as LaravelExceptionHandler;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
-use MyParcelCom\Integration\Exceptions\Handler;
 
 use function config;
 
@@ -25,8 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(ExceptionHandler::class, function (Container $app) {
-            return (new Handler($app))
+        $this->app->singleton(LaravelExceptionHandler::class, function (Container $app) {
+            return (new ExceptionHandler($app))
                 ->setResponseFactory($app->make(ResponseFactory::class))
                 ->setDebug((bool) config('app.debug'));
         });
