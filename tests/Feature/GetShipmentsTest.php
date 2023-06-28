@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
-use App\Authentication\Domain\ExpiresAt;
-use App\Authentication\Domain\Token;
-use Carbon\Carbon;
 use Faker\Factory;
 use Tests\TestCase;
 
 class GetShipmentsTest extends TestCase
 {
+    use CanCreateActiveTokens;
+
     public function test_should_get_400_bad_request_when_shop_id_is_missing(): void
     {
         $response = $this->get('/shipments');
@@ -48,13 +47,6 @@ class GetShipmentsTest extends TestCase
         );
 
         $response->assertStatus(200);
-    }
-
-    private function createActiveToken(): Token
-    {
-        return Token::factory()->create([
-            'expires_at' => new ExpiresAt(Carbon::now()->addSeconds(600)),
-        ]);
     }
 
     public function test_should_get_one_shipment(): void
