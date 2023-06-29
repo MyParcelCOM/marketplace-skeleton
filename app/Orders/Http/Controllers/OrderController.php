@@ -16,8 +16,7 @@ class OrderController
 {
     public function get(string $orderId, OrderRequest $request): ProvidesJsonAPI
     {
-        // TODO Shop UUID is always provided and you should use it to distinguish
-        // TODO between different auth sessions
+        // TODO Shop UUID is always provided and you should use it to distinguish between different auth sessions
         $shopId = $request->shopId();
 
         // TODO Use the access token to connect to the remote API from where orders are fetched
