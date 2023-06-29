@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "27357b7d2f9e9fa02d47216466d8dd87",
+    "content-hash": "ac6e40c808fdd5860ac2267672590f6f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2025,16 +2025,16 @@
         },
         {
             "name": "myparcelcom/integration-commons",
-            "version": "dev-feature/MP-5964-orders",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MyParcelCOM/integration-commons.git",
-                "reference": "d320e6e39a06bb8c8d05bccff73b48a243a56047"
+                "reference": "7d9e226534394de428c17c9efa858400c088e233"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyParcelCOM/integration-commons/zipball/d320e6e39a06bb8c8d05bccff73b48a243a56047",
-                "reference": "d320e6e39a06bb8c8d05bccff73b48a243a56047",
+                "url": "https://api.github.com/repos/MyParcelCOM/integration-commons/zipball/7d9e226534394de428c17c9efa858400c088e233",
+                "reference": "7d9e226534394de428c17c9efa858400c088e233",
                 "shasum": ""
             },
             "require": {
@@ -2068,9 +2068,9 @@
             "description": "Library with common classes used for constructing MyParcel.com eCommerce Integrations",
             "support": {
                 "issues": "https://github.com/MyParcelCOM/integration-commons/issues",
-                "source": "https://github.com/MyParcelCOM/integration-commons/tree/feature/MP-5964-orders"
+                "source": "https://github.com/MyParcelCOM/integration-commons/tree/v1.0.0"
             },
-            "time": "2023-06-28T17:40:46+00:00"
+            "time": "2023-06-29T10:24:54+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -7534,12 +7534,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "3b77f2101068074f1c98977cc34ef939bbce3d19"
+                "reference": "9920192eab87b9ae105696b0b86326c8fac91677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/3b77f2101068074f1c98977cc34ef939bbce3d19",
-                "reference": "3b77f2101068074f1c98977cc34ef939bbce3d19",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/9920192eab87b9ae105696b0b86326c8fac91677",
+                "reference": "9920192eab87b9ae105696b0b86326c8fac91677",
                 "shasum": ""
             },
             "conflict": {
@@ -7915,7 +7915,7 @@
                 "shopware/core": "<=6.4.20",
                 "shopware/platform": "<=6.4.20",
                 "shopware/production": "<=6.3.5.2",
-                "shopware/shopware": "<=5.7.14",
+                "shopware/shopware": "<=5.7.17",
                 "shopware/storefront": "<=6.4.8.1",
                 "shopxo/shopxo": "<2.2.6",
                 "showdoc/showdoc": "<2.10.4",
@@ -8142,7 +8142,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-28T00:17:41+00:00"
+            "time": "2023-06-28T23:04:41+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -9236,7 +9236,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "myparcelcom/integration-commons": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
