@@ -7,11 +7,11 @@ namespace App\Shipments\Http\Controllers;
 use App\Shipments\Http\Requests\ShipmentRequest;
 use Carbon\Carbon;
 use JetBrains\PhpStorm\ArrayShape;
-use MyParcelCom\Integration\Shipment\Address;
+use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Shipment\Items\Item;
 use MyParcelCom\Integration\Shipment\Items\ItemCollection;
-use MyParcelCom\Integration\Shipment\PhysicalProperties;
-use MyParcelCom\Integration\Shipment\Price;
+use MyParcelCom\Integration\PhysicalProperties;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Shipment;
 use function config;
 
@@ -48,16 +48,15 @@ class ShipmentController
             // This is an example shipment
             new Shipment(
                 shopId: $shopId,
-                createdAt: Carbon::createFromTimeString('2020-01-01 12:30:00'),
                 recipientAddress: new Address(
                     street1: 'Baker St',
-                    streetNumber: 221,
-                    streetNumberSuffix: 'b',
-                    postalCode: 'NW1 6XE',
                     city: 'London',
                     countryCode: 'GB',
                     firstName: 'Sherlock',
                     lastName: 'Holmes',
+                    streetNumber: 221,
+                    streetNumberSuffix: 'b',
+                    postalCode: 'NW1 6XE',
                     company: '',
                     email: 'sherlock@holmes.com',
                     phoneNumber: '+123456789',
@@ -65,8 +64,8 @@ class ShipmentController
                 description: 'Google Chromecast Ultra',
                 customerReference: '#1234567890',
                 channel: config('app.channel'),
-                totalValue: new Price(4000, 'EUR'), // amount is in cents
-                price: new Price(4000, 'EUR'),
+                totalValue: new Price(4000, 'EUR'),
+                price: new Price(4000, 'EUR'), // amount is in cents
                 physicalProperties: new PhysicalProperties(
                     weight: 500,
                     height: 30,
@@ -84,19 +83,19 @@ class ShipmentController
                         originCountryCode: 'US',
                     ),
                 ),
+                createdAt: Carbon::createFromTimeString('2020-01-01 12:30:00'),
             ),
             // This is another example shipment
             new Shipment(
                 shopId: $shopId,
-                createdAt: Carbon::createFromTimeString('2020-01-13 20:10:00'),
                 recipientAddress: new Address(
                     street1: 'Bell St',
-                    streetNumber: 27,
-                    postalCode: 'NW1 5BY',
                     city: 'London',
                     countryCode: 'GB',
                     firstName: 'James',
                     lastName: 'Bond',
+                    streetNumber: 27,
+                    postalCode: 'NW1 5BY',
                     email: 'james@bond.com',
                     phoneNumber: '+123456789',
                 ),
@@ -122,6 +121,7 @@ class ShipmentController
                         originCountryCode: 'US',
                     ),
                 ),
+                createdAt: Carbon::createFromTimeString('2020-01-13 20:10:00'),
             ),
         ];
 
