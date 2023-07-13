@@ -21,7 +21,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use MyParcelCom\Integration\Http\Middleware\MatchingChannelOnly;
-use MyParcelCom\Integration\Http\Middleware\TransformsToJsonApi;
+use MyParcelCom\Integration\Http\Middleware\TransformsManyToJsonApi;
+use MyParcelCom\Integration\Http\Middleware\TransformsOneToJsonApi;
 
 class Kernel extends HttpKernel
 {
@@ -61,15 +62,16 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'                  => Authenticate::class,
-        'auth.basic'            => AuthenticateWithBasicAuth::class,
-        'cache.headers'         => SetCacheHeaders::class,
-        'can'                   => Authorize::class,
-        'password.confirm'      => RequirePassword::class,
-        'signed'                => ValidateSignature::class,
-        'throttle'              => ThrottleRequests::class,
-        'verified'              => EnsureEmailIsVerified::class,
-        'transform_to_json_api' => TransformsToJsonApi::class,
-        'matching_channel_only' => MatchingChannelOnly::class,
+        'auth'                       => Authenticate::class,
+        'auth.basic'                 => AuthenticateWithBasicAuth::class,
+        'cache.headers'              => SetCacheHeaders::class,
+        'can'                        => Authorize::class,
+        'password.confirm'           => RequirePassword::class,
+        'signed'                     => ValidateSignature::class,
+        'throttle'                   => ThrottleRequests::class,
+        'verified'                   => EnsureEmailIsVerified::class,
+        'transform_many_to_json_api' => TransformsManyToJsonApi::class,
+        'transform_one_to_json_api'  => TransformsOneToJsonApi::class,
+        'matching_channel_only'      => MatchingChannelOnly::class,
     ];
 }

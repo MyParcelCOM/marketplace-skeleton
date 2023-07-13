@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Authentication\Http\Controllers\AuthenticationController;
+use App\Orders\Http\Controllers\OrderController;
 use App\Shipments\Http\Controllers\ShipmentController;
 use App\Statuses\Http\Controllers\ShipmentStatusCallbackController;
 use Illuminate\Http\JsonResponse;
@@ -25,8 +26,12 @@ Route::group(
 
 Route::get('shipments', ShipmentController::class . '@get')
     ->name('get-shipments')
-    ->middleware('transform_to_json_api');
+    ->middleware('transform_many_to_json_api');
 
 Route::post('callback/shipment-statuses', ShipmentStatusCallbackController::class . '@post')
     ->name('shipment-statuses')
     ->middleware('matching_channel_only:' . config('app.channel'));
+
+Route::get('orders/{order_id}', OrderController::class . '@get')
+    ->name('get-order')
+    ->middleware('transform_one_to_json_api');
