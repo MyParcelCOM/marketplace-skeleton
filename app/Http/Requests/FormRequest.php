@@ -14,7 +14,6 @@ use Ramsey\Uuid\Uuid;
 
 class FormRequest extends IlluminateFormRequest
 {
-
     public function authorize(): bool
     {
         return true;
