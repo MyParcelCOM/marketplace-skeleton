@@ -3,11 +3,11 @@ version: '3'
 services:
     integration.skeleton:
         build:
-            context: ./docker/8.0
+            context: docker/8.2
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: myparcelcom/integration-skeleton:v1-dev
+        image: myparcelcom/integration-skeleton:v2-dev
         ports:
             - '${APP_PORT:-80}:80'
         environment:
