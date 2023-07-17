@@ -8,5 +8,4 @@ use App\Http\Requests\FormRequest;
 
 class OrderRequest extends FormRequest
 {
-
 }

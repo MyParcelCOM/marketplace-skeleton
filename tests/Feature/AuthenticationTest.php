@@ -43,7 +43,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(302);
         $response->assertRedirect($redirectUri);
@@ -76,7 +76,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(400);
         $response->assertExactJson([
@@ -117,7 +117,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(400);
         $response->assertExactJson([
@@ -150,7 +150,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
         $response->assertStatus(400);
     }
 

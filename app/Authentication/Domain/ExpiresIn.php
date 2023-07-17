@@ -11,8 +11,9 @@ use JetBrains\PhpStorm\Immutable;
 #[Immutable]
 class ExpiresIn
 {
-    public function __construct(private int $seconds)
-    {
+    public function __construct(
+        private int $seconds,
+    ) {
         if ($this->seconds < 0) {
             throw new InvalidExpiresInSecondsException(
                 "expires_in seconds cannot be a negative value, {$this->seconds} given"

@@ -69,7 +69,7 @@ class ShipmentStatusCallbackRequest extends FormRequest
         if (!$token) {
             throw new RequestUnauthorizedException(
                 'Unauthorized',
-                "No access token found for shop ${shopId}. Is shop authenticated?"
+                "No access token found for shop {$shopId}. Is shop authenticated?"
             );
         }
 

@@ -85,7 +85,7 @@ class AuthenticationController extends Controller
         // TODO Expand upon the AuthServer class to satisfy the logic below
         $authServerResponse = $authServer->requestAccessToken(
             $request->code(),
-            config('services.remote.oauth2.client_id') . "?session_token=${sessionToken}",
+            config('services.remote.oauth2.client_id') . "?session_token={$sessionToken}",
         );
 
         // Next, we save the acquired access token (alongside refresh token and other meta data) into the database
