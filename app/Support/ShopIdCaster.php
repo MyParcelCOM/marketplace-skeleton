@@ -25,12 +25,8 @@ class ShopIdCaster implements CastsAttributes
     }
 
     #[ArrayShape(['shop_id' => 'string'])]
-    public function set(
-        $model,
-        string $key,
-        $value,
-        array $attributes
-    ): string {
+    public function set($model, string $key, $value, array $attributes,): string
+    {
         return $value->toString();
     }
 }

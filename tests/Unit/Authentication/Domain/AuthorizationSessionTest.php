@@ -18,16 +18,18 @@ class AuthorizationSessionTest extends TestCase
     {
         $this->expectNotToPerformAssertions();
 
-        $authSession = new AuthorizationSession(Mockery::mock(Repository::class, [
-            'put' => null,
-        ]));
+        $authSession = new AuthorizationSession(
+            Mockery::mock(Repository::class, [
+                'put' => null,
+            ])
+        );
 
         $faker = Factory::create();
         $authSession->save(
             Mockery::mock(ShopId::class, [
                 'toString' => $faker->uuid,
             ]),
-            $faker->uuid
+            $faker->uuid,
         );
     }
 
@@ -38,13 +40,15 @@ class AuthorizationSessionTest extends TestCase
         $shopId = $faker->uuid;
         $redirectUri = $faker->url;
 
-        $authSession = new AuthorizationSession(Mockery::mock(Repository::class, [
-            'pull' => [
-                'shop_id'      => $shopId,
-                'redirect_uri' => $redirectUri,
-            ],
-            'has'  => true,
-        ]));
+        $authSession = new AuthorizationSession(
+            Mockery::mock(Repository::class, [
+                'pull' => [
+                    'shop_id'      => $shopId,
+                    'redirect_uri' => $redirectUri,
+                ],
+                'has'  => true,
+            ])
+        );
 
         $payload = $authSession->fetch($faker->uuid);
 
@@ -59,9 +63,11 @@ class AuthorizationSessionTest extends TestCase
 
         $faker = Factory::create();
 
-        $authSession = new AuthorizationSession(Mockery::mock(Repository::class, [
-            'has' => false,
-        ]));
+        $authSession = new AuthorizationSession(
+            Mockery::mock(Repository::class, [
+                'has' => false,
+            ])
+        );
 
         $authSession->fetch($faker->uuid);
     }

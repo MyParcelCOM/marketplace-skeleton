@@ -19,7 +19,7 @@ class AuthRequestException extends BadRequestException
         private string $title,
         string $detail,
         int $code = 0,
-        Throwable $previous = null
+        Throwable $previous = null,
     ) {
         parent::__construct($detail, $code, $previous);
     }

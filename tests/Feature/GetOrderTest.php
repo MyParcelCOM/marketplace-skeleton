@@ -39,7 +39,7 @@ class GetOrderTest extends TestCase
 
         $response = $this->get(
             '/orders/1234567?shop_id='
-            . $token->shop_id
+            . $token->shop_id,
         );
 
         $response->assertStatus(200);

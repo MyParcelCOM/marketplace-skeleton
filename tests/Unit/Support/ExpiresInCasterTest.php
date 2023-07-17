@@ -9,7 +9,6 @@ use App\Support\ExpiresInCaster;
 use Illuminate\Database\Eloquent\Model;
 use Mockery;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class ExpiresInCasterTest extends TestCase
 {
@@ -24,7 +23,7 @@ class ExpiresInCasterTest extends TestCase
             Mockery::mock(Model::class),
             '',
             $seconds,
-            []
+            [],
         );
 
         self::assertEquals(new ExpiresIn($seconds), $expiresIn);

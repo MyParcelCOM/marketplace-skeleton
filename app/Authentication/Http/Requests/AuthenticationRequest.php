@@ -3,7 +3,6 @@
 namespace App\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use function urldecode;
 
 class AuthenticationRequest extends FormRequest
 {

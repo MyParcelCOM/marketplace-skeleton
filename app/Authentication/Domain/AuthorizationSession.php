@@ -19,7 +19,7 @@ class AuthorizationSession
     private const TOKEN_TTL = 'PT5M'; // 5 minutes
 
     public function __construct(
-        private Repository $cache
+        private Repository $cache,
     ) {
     }
 
@@ -35,7 +35,7 @@ class AuthorizationSession
         $this->cache->put(
             self::TOKEN_PREFIX . $token,
             $payload,
-            new DateInterval(self::TOKEN_TTL)
+            new DateInterval(self::TOKEN_TTL),
         );
 
         return $token;
@@ -46,7 +46,7 @@ class AuthorizationSession
         'redirect_uri' => 'string',
     ])]
     public function fetch(
-        string $token
+        string $token,
     ): array {
         $key = self::TOKEN_PREFIX . $token;
 

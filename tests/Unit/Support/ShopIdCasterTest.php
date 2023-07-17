@@ -24,7 +24,7 @@ class ShopIdCasterTest extends TestCase
             Mockery::mock(Model::class),
             '',
             $uuid,
-            []
+            [],
         );
 
         self::assertEquals(new ShopId(Uuid::fromString($uuid)), $shopId);

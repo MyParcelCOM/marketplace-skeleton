@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use MyParcelCom\Integration\Exceptions\Handler;
 
-use function config;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,13 +29,13 @@ class AppServiceProvider extends ServiceProvider
                 ->setDebug((bool) config('app.debug'));
         });
 
-        $this->app->singleton(AuthServerInterface::class, fn() => new AuthServer(
+        $this->app->singleton(AuthServerInterface::class, fn () => new AuthServer(
             (string) config('services.remote.oauth2.client_id'),
             (string) config('services.remote.oauth2.client_secret'),
         ));
 
         if (!$this->app->environment('testing')) {
-            $this->app->singleton(AuthorizationSession::class, fn() => new AuthorizationSession(
+            $this->app->singleton(AuthorizationSession::class, fn () => new AuthorizationSession(
                 Cache::store('redis')
             ));
         }
