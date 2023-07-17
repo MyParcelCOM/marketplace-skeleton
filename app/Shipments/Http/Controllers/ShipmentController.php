@@ -8,19 +8,18 @@ use App\Shipments\Http\Requests\ShipmentRequest;
 use Carbon\Carbon;
 use JetBrains\PhpStorm\ArrayShape;
 use MyParcelCom\Integration\Address;
-use MyParcelCom\Integration\Shipment\Items\Item;
-use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\PhysicalProperties;
 use MyParcelCom\Integration\Price;
+use MyParcelCom\Integration\Shipment\Items\Item;
+use MyParcelCom\Integration\Shipment\Items\ItemCollection;
 use MyParcelCom\Integration\Shipment\Shipment;
-use function config;
 
 class ShipmentController
 {
     #[ArrayShape([
-        'items'         => "\MyParcelCom\Integration\Shipment\Shipment[]",
-        'total_records' => "int",
-        'total_pages'   => "int"
+        'items'         => '\MyParcelCom\Integration\Shipment\Shipment[]',
+        'total_records' => 'int',
+        'total_pages'   => 'int',
     ])]
     public function get(ShipmentRequest $request): array
     {

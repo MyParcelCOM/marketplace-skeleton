@@ -20,7 +20,7 @@ class TokenTypeTest extends TestCase
             Mockery::mock(Model::class),
             '',
             'bearer',
-            []
+            [],
         );
 
         self::assertEquals(TokenType::BEARER(), $tokenType);

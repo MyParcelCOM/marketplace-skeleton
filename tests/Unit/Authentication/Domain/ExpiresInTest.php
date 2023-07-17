@@ -9,7 +9,6 @@ use App\Authentication\Domain\ExpiresAt;
 use App\Authentication\Domain\ExpiresIn;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
-use function random_int;
 
 class ExpiresInTest extends TestCase
 {

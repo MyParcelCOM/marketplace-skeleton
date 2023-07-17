@@ -29,7 +29,7 @@ interface AuthServerInterface
     #[ArrayShape(self::RESPONSE_FORMAT)]
     public function requestAccessToken(
         string $code,
-        string $redirectUri
+        string $redirectUri,
     ): array;
 
     /**
@@ -40,6 +40,6 @@ interface AuthServerInterface
      */
     #[ArrayShape(self::RESPONSE_FORMAT)]
     public function refreshToken(
-        string $refreshToken
+        string $refreshToken,
     ): array;
 }

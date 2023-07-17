@@ -24,7 +24,7 @@ class ShipmentStatusCallbackTest extends TestCase
 
         $response = $this->post(
             '/callback/shipment-statuses',
-            $data
+            $data,
         );
 
         $response->assertStatus(200);
