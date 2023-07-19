@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Settings\Http\Requests;
+namespace App\Shops\Http\Requests;
 
 use App\Http\Requests\FormRequest;
 
-class SettingsRequest extends FormRequest
+class ShopRequest extends FormRequest
 {
     public function rules(): array
     {

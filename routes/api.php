@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Authentication\Http\Controllers\AuthenticationController;
 use App\Orders\Http\Controllers\OrderController;
-use App\Settings\Http\Controllers\SettingsController;
+use App\Shops\Http\Controllers\ShopController;
 use App\Shipments\Http\Controllers\ShipmentController;
 use App\Statuses\Http\Controllers\ShipmentStatusCallbackController;
 use Illuminate\Http\JsonResponse;
@@ -24,10 +24,10 @@ Route::prefix('public')->group(function () {
         ->name('authenticate');
 });
 
-Route::post('/settings', [SettingsController::class, 'create'])
-    ->name('post-settings');
-Route::delete('/settings', [SettingsController::class, 'delete'])
-    ->name('delete-settings');
+Route::post('/shops/{shop_id}/setup', [ShopController::class, 'setUp'])
+    ->name('shop-setup');
+Route::post('/shops/{shop_id}/teardown', [ShopController::class, 'tearDown'])
+    ->name('shop-teardown');
 
 Route::get('/shipments', [ShipmentController::class, 'get'])
     ->name('get-shipments')
