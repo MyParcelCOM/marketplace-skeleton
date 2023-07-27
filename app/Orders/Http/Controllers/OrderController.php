@@ -42,11 +42,13 @@ class OrderController
             ),
             items: new ItemCollection(
                 new Item(
+                    id: 'test-item-1',
                     name: 'The Adventures of Sherlock Holmes',
                     description: 'A collection of twelve short stories by Arthur Conan Doyle.',
                     quantity: 1,
                 ),
                 new Item(
+                    id: 'test-item-2',
                     name: 'The Memoirs of Sherlock Holmes',
                     description: 'A collection of Sherlock Holmes stories by Arthur Conan Doyle.',
                     quantity: 1,
