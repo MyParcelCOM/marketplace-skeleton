@@ -6,14 +6,13 @@ namespace App\Authentication\Domain;
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
-use function http_build_query;
 
 class AuthorizationLink
 {
     public function __construct(
         private string $clientId,
         private string $redirectUri,
-        private string $sessionToken
+        private string $sessionToken,
     ) {
     }
 

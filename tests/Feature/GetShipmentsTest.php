@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnhandledExceptionInspection */
+<?php
 
 declare(strict_types=1);
 
@@ -43,7 +43,7 @@ class GetShipmentsTest extends TestCase
             . '&filter[start_date]=2020-01-01'
             . '&filter[end_date]=2022-01-01'
             . '&page[number]=1'
-            . '&page[size]=10'
+            . '&page[size]=10',
         );
 
         $response->assertStatus(200);
@@ -68,7 +68,7 @@ class GetShipmentsTest extends TestCase
             . '&filter[start_date]=2020-01-01'
             . '&filter[end_date]=2022-01-01'
             . '&page[number]=1'
-            . '&page[size]=10'
+            . '&page[size]=10',
         );
 
         $response->assertStatus(200);

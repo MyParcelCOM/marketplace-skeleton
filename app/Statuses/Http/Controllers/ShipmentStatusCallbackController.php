@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 class ShipmentStatusCallbackController
 {
     public function post(
-        ShipmentStatusCallbackRequest $request
+        ShipmentStatusCallbackRequest $request,
     ): JsonResponse {
         $shopId = $request->shopId();
 

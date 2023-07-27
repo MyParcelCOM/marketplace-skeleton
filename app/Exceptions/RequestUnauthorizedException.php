@@ -14,7 +14,7 @@ class RequestUnauthorizedException extends AbstractRequestException
         protected string $title,
         string $detail,
         int $code = 401,
-        Throwable $previous = null
+        Throwable $previous = null,
     ) {
         parent::__construct($title, $detail, $code, $previous);
     }

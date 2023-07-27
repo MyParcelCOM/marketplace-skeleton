@@ -13,8 +13,6 @@ use App\Authentication\Http\Requests\InitAuthRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use function config;
-use function response;
 
 class AuthenticationController extends Controller
 {
@@ -64,7 +62,7 @@ class AuthenticationController extends Controller
     public function authenticate(
         AuthenticationRequest $request,
         AuthorizationSession $authorizationSession,
-        AuthServerInterface $authServer
+        AuthServerInterface $authServer,
     ): RedirectResponse {
         //
         // After successful authorization is performed by the remote authorization server the customer is redirected
@@ -87,7 +85,7 @@ class AuthenticationController extends Controller
         // TODO Expand upon the AuthServer class to satisfy the logic below
         $authServerResponse = $authServer->requestAccessToken(
             $request->code(),
-            config('services.remote.oauth2.client_id') . "?session_token=${sessionToken}"
+            config('services.remote.oauth2.client_id') . "?session_token={$sessionToken}",
         );
 
         // Next, we save the acquired access token (alongside refresh token and other meta data) into the database

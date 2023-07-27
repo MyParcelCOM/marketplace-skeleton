@@ -8,14 +8,12 @@ use App\Authentication\Domain\TokenType;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\Pure;
-use function is_null;
 
 class TokenTypeCaster implements CastsAttributes
 {
     #[Pure]
-    public function get(
-        $model, string $key, $value, array $attributes
-    ): ?TokenType {
+    public function get($model, string $key, $value, array $attributes): ?TokenType
+    {
         return is_null($value) ? null : new TokenType((string) $value);
     }
 

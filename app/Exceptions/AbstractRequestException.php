@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
-use function response;
 
 abstract class AbstractRequestException extends InvalidArgumentException
 {
@@ -17,7 +16,7 @@ abstract class AbstractRequestException extends InvalidArgumentException
         protected string $title,
         string $detail,
         int $code = 0,
-        Throwable $previous = null
+        Throwable $previous = null,
     ) {
         parent::__construct($detail, $code, $previous);
     }

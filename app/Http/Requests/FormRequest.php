@@ -14,7 +14,6 @@ use Ramsey\Uuid\Uuid;
 
 class FormRequest extends IlluminateFormRequest
 {
-
     public function authorize(): bool
     {
         return true;
@@ -55,7 +54,7 @@ class FormRequest extends IlluminateFormRequest
         if (!$token) {
             throw new RequestUnauthorizedException(
                 'Unauthorized',
-                "No access token found for shop ${shopId}. Is shop authenticated?"
+                "No access token found for shop {$shopId}. Is shop authenticated?"
             );
         }
 

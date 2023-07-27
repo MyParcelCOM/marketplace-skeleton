@@ -11,7 +11,7 @@ use JetBrains\PhpStorm\Immutable;
 class ExpiresAt
 {
     public function __construct(
-        private Carbon $dateTime
+        private Carbon $dateTime,
     ) {
     }
 

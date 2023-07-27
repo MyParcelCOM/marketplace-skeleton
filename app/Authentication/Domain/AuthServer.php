@@ -13,7 +13,7 @@ class AuthServer implements AuthServerInterface
     public function __construct(
         // TODO Use these client credentials with the remote authorization server
         private string $clientId,
-        private string $clientSecret
+        private string $clientSecret,
     ) {
     }
 
@@ -24,7 +24,7 @@ class AuthServer implements AuthServerInterface
     #[ArrayShape(AuthServerInterface::RESPONSE_FORMAT)]
     public function requestAccessToken(
         string $code,
-        string $redirectUri
+        string $redirectUri,
     ): array {
         // TODO Implement logic to request an access token from the authorization server
         // TODO Tip: use the formatResponse() method below to ensure correct data types for that expires_in and token_type
@@ -36,7 +36,7 @@ class AuthServer implements AuthServerInterface
      */
     #[ArrayShape(AuthServerInterface::RESPONSE_FORMAT)]
     public function refreshToken(
-        string $refreshToken
+        string $refreshToken,
     ): array {
         // TODO Implement logic to refresh access token with the authorization server
         // TODO Tip: use the formatResponse() method below to ensure correct data types for that expires_in and token_type

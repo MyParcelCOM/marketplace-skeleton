@@ -8,7 +8,6 @@ use App\Authentication\Domain\ExpiresIn;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\Pure;
-use function is_null;
 
 class ExpiresInCaster implements CastsAttributes
 {

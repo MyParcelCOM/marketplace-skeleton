@@ -14,10 +14,6 @@ use Mockery;
 use MyParcelCom\Integration\ShopId;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
-use function config;
-use function http_build_query;
-use function parse_str;
-use function preg_quote;
 
 class AuthenticationTest extends TestCase
 {
@@ -27,7 +23,7 @@ class AuthenticationTest extends TestCase
 
         $faker = Factory::create();
 
-        $this->app->singleton(AuthServerInterface::class, fn() => new AuthServer(
+        $this->app->singleton(AuthServerInterface::class, fn () => new AuthServer(
             $faker->uuid,
             $faker->password,
         ));
@@ -35,7 +31,7 @@ class AuthenticationTest extends TestCase
         $shopId = $faker->uuid;
         $redirectUri = $faker->url;
 
-        $this->app->singleton(AuthorizationSession::class, fn() => Mockery::mock(AuthorizationSession::class, [
+        $this->app->singleton(AuthorizationSession::class, fn () => Mockery::mock(AuthorizationSession::class, [
             'fetch' => [
                 'shop_id'      => new ShopId(Uuid::fromString($shopId)),
                 'redirect_uri' => $redirectUri,
@@ -47,7 +43,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(302);
         $response->assertRedirect($redirectUri);
@@ -64,11 +60,11 @@ class AuthenticationTest extends TestCase
         $faker = Factory::create();
         $shopId = $faker->uuid;
 
-        $this->app->singleton(AuthServerInterface::class, fn() => new AuthServer(
+        $this->app->singleton(AuthServerInterface::class, fn () => new AuthServer(
             $faker->uuid,
             $faker->password,
         ));
-        $this->app->singleton(AuthorizationSession::class, fn() => Mockery::mock(AuthorizationSession::class, [
+        $this->app->singleton(AuthorizationSession::class, fn () => Mockery::mock(AuthorizationSession::class, [
             'fetch' => [
                 'shop_id'      => new ShopId(Uuid::fromString($shopId)),
                 'redirect_uri' => $faker->url,
@@ -80,7 +76,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(400);
         $response->assertExactJson([
@@ -105,11 +101,11 @@ class AuthenticationTest extends TestCase
         $faker = Factory::create();
         $shopId = $faker->uuid;
 
-        $this->app->singleton(AuthServerInterface::class, fn() => new AuthServer(
+        $this->app->singleton(AuthServerInterface::class, fn () => new AuthServer(
             $faker->uuid,
             $faker->password,
         ));
-        $this->app->singleton(AuthorizationSession::class, fn() => Mockery::mock(AuthorizationSession::class, [
+        $this->app->singleton(AuthorizationSession::class, fn () => Mockery::mock(AuthorizationSession::class, [
             'fetch' => [
                 'shop_id'      => new ShopId(Uuid::fromString($shopId)),
                 'redirect_uri' => $faker->url,
@@ -121,7 +117,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
 
         $response->assertStatus(400);
         $response->assertExactJson([
@@ -145,7 +141,7 @@ class AuthenticationTest extends TestCase
 
         $faker = Factory::create();
 
-        $this->app->singleton(Repository::class, fn() => Mockery::mock(Repository::class, [
+        $this->app->singleton(Repository::class, fn () => Mockery::mock(Repository::class, [
             'has' => false,
         ]));
 
@@ -154,7 +150,7 @@ class AuthenticationTest extends TestCase
             'code'          => $faker->text,
         ]);
 
-        $response = $this->get("/public/authenticate?${query}");
+        $response = $this->get("/public/authenticate?{$query}");
         $response->assertStatus(400);
     }
 
@@ -170,7 +166,7 @@ class AuthenticationTest extends TestCase
 
         config()->set('services.remote.oauth2.client_id', $clientId);
         config()->set('services.remote.oauth2.redirect_uri', $redirectUri);
-        $this->app->singleton(AuthorizationSession::class, fn() => Mockery::mock(AuthorizationSession::class, [
+        $this->app->singleton(AuthorizationSession::class, fn () => Mockery::mock(AuthorizationSession::class, [
             'save' => $token,
         ]));
 
@@ -190,6 +186,9 @@ class AuthenticationTest extends TestCase
         self::assertEquals('/oauth2/auth', $authLink->getPath());
         self::assertEquals($clientId, $query['client_id']);
         self::assertEquals('code', $query['response_type']);
-        self::assertMatchesRegularExpression('/^(' . preg_quote($redirectUri, '/') . ')\?session_token=.+?/', $query['redirect_uri']);
+        self::assertMatchesRegularExpression(
+            '/^(' . preg_quote($redirectUri, '/') . ')\?session_token=.+?/',
+            $query['redirect_uri'],
+        );
     }
 }

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use MyParcelCom\Integration\ShopId;
 use Ramsey\Uuid\Uuid;
-use function random_int;
 
 class TokenFactory extends Factory
 {

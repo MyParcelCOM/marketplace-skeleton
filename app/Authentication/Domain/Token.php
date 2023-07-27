@@ -53,7 +53,7 @@ class Token extends Model
 
     #[Pure]
     public static function create(
-        ShopId $shopId
+        ShopId $shopId,
     ): self {
         $token = new self();
         $token->shop_id = $shopId;

@@ -24,7 +24,7 @@ class ExpiresAtCasterTest extends TestCase
             Mockery::mock(Model::class),
             '',
             $dateTime,
-            []
+            [],
         );
 
         self::assertEquals(new ExpiresAt(Carbon::instance($dateTime)), $expiresIn);
