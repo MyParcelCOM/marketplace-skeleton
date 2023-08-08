@@ -10,6 +10,7 @@ use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Order\Items\Item;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\Order\Order;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\ProvidesJsonAPI;
 
 class OrderController
@@ -46,14 +47,22 @@ class OrderController
                     name: 'The Adventures of Sherlock Holmes',
                     description: 'A collection of twelve short stories by Arthur Conan Doyle.',
                     quantity: 1,
+                    itemPrice: new Price(
+                        amount: 1000,
+                        currency: 'EUR',
+                    ),
                 ),
                 new Item(
                     id: 'test-item-2',
                     name: 'The Memoirs of Sherlock Holmes',
                     description: 'A collection of Sherlock Holmes stories by Arthur Conan Doyle.',
                     quantity: 1,
+                    itemPrice: new Price(
+                        amount: 2000,
+                        currency: 'EUR',
+                    ),
                 ),
-            )
+            ),
         );
     }
 }
