@@ -27,7 +27,7 @@ RUN apt-get update \
        php8.2-xml php8.2-zip php8.2-bcmath php8.2-soap \
        php8.2-intl php8.2-readline \
        php8.2-msgpack php8.2-igbinary php8.2-ldap \
-       php8.2-redis \
+       php8.2-redis php8.2-xdebug \
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_15.x | bash - \
     && apt-get install -y nodejs \

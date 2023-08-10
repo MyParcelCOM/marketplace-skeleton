@@ -7,10 +7,16 @@ namespace App\Orders\Http\Controllers;
 use App\Orders\Http\Requests\OrderRequest;
 use Carbon\Carbon;
 use MyParcelCom\Integration\Address;
+use MyParcelCom\Integration\Order\Items\Annotation;
+use MyParcelCom\Integration\Order\Items\Feature;
+use MyParcelCom\Integration\Order\Items\FeatureCollection;
 use MyParcelCom\Integration\Order\Items\Item;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\Order\Order;
+use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\ProvidesJsonAPI;
+use MyParcelCom\Integration\Weight;
+use MyParcelCom\Integration\WeightUnit;
 
 class OrderController
 {
@@ -46,14 +52,33 @@ class OrderController
                     name: 'The Adventures of Sherlock Holmes',
                     description: 'A collection of twelve short stories by Arthur Conan Doyle.',
                     quantity: 1,
+                    itemPrice: new Price(
+                        amount: 1000,
+                        currency: 'EUR',
+                    ),
                 ),
                 new Item(
                     id: 'test-item-2',
                     name: 'The Memoirs of Sherlock Holmes',
                     description: 'A collection of Sherlock Holmes stories by Arthur Conan Doyle.',
                     quantity: 1,
+                    itemPrice: new Price(
+                        amount: 2000,
+                        currency: 'EUR',
+                    ),
+                    itemWeight: new Weight(
+                        amount: 600,
+                        unit: WeightUnit::GRAM,
+                    ),
+                    features: new FeatureCollection(
+                        new Feature(
+                            key: 'colour',
+                            value: 'Red',
+                            annotation: Annotation::COLOR
+                        ),
+                    ),
                 ),
-            )
+            ),
         );
     }
 }

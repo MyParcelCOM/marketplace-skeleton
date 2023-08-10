@@ -1,4 +1,4 @@
-# MyParcel.com - e-Commerce Integration Skeleton
+# MyParcel.com - Marketplace Integration Skeleton
 This is a skeleton application for a microservice that converts e-Commerce orders coming from a remote API into MyParcel.com Shipment resources.
 
 This skeleton already handles parts of the logic related to transforming order data into Shipment resources in accordance to the [MyParcel.com API Specification](https://api-specification.myparcel.com).

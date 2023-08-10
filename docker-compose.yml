@@ -1,18 +1,20 @@
 # For more information: https://laravel.com/docs/sail
 version: '3'
 services:
-    integration.skeleton:
+    marketplace.skeleton:
         build:
             context: docker/8.2
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: myparcelcom/integration-skeleton:v2-dev
+        image: myparcelcom/marketplace-skeleton:v1-dev
         ports:
             - '${APP_PORT:-80}:80'
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
         volumes:
             - '.:/var/www/html'
         networks:
