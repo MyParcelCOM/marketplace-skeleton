@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orders\Http\Controllers;
 
 use App\Orders\Http\Requests\OrderRequest;
+use App\Orders\Http\Requests\OrdersCountRequest;
 use Carbon\Carbon;
 use MyParcelCom\Integration\Address;
 use MyParcelCom\Integration\Order\Items\Annotation;
@@ -83,7 +84,7 @@ class OrderController
         );
     }
 
-    public function getCount(OrderRequest $request): OrdersCountResponse
+    public function getCount(OrdersCountRequest $request): OrdersCountResponse
     {
         // TODO Shop UUID is always provided and you should use it to distinguish between different auth sessions
         $shopId = $request->shopId();
@@ -92,6 +93,9 @@ class OrderController
         $accessToken = $request->token();
 
         // TODO Here you can start incorporating logic that gets the (total) orders count from the remote API
+        // TODO Use the dateFrom and dateTo query parameters to set the date range for the orders count
+        $dateFrom = $request->dateFrom();
+        $dateTo = $request->dateTo();
         $ordersCount = 0;
 
         // TODO Finally, you are expected to return an OrdersCountResponse object
