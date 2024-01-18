@@ -13,6 +13,7 @@ use MyParcelCom\Integration\Order\Items\FeatureCollection;
 use MyParcelCom\Integration\Order\Items\Item;
 use MyParcelCom\Integration\Order\Items\ItemCollection;
 use MyParcelCom\Integration\Order\Order;
+use MyParcelCom\Integration\Order\OrdersCountResponse;
 use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\ProvidesJsonAPI;
 use MyParcelCom\Integration\Weight;
@@ -80,5 +81,20 @@ class OrderController
                 ),
             ),
         );
+    }
+
+    public function getCount(OrderRequest $request): OrdersCountResponse
+    {
+        // TODO Shop UUID is always provided and you should use it to distinguish between different auth sessions
+        $shopId = $request->shopId();
+
+        // TODO Use the access token to connect to the remote API from where orders are fetched
+        $accessToken = $request->token();
+
+        // TODO Here you can start incorporating logic that gets the (total) orders count from the remote API
+        $ordersCount = 0;
+
+        // TODO Finally, you are expected to return an OrdersCountResponse object
+        return new OrdersCountResponse($ordersCount);
     }
 }

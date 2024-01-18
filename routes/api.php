@@ -29,6 +29,9 @@ Route::post('/shops/{shop_id}/setup', [ShopController::class, 'setUp'])
 Route::post('/shops/{shop_id}/teardown', [ShopController::class, 'tearDown'])
     ->name('shop-teardown');
 
+Route::get('/shops/{shop_id}/orders/counts', [OrderController::class, 'getCount'])
+    ->name('get-orders-count');
+
 Route::get('/shipments', [ShipmentController::class, 'get'])
     ->name('get-shipments')
     ->middleware('transform_many_to_json_api');
