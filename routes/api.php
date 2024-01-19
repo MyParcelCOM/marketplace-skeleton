@@ -29,9 +29,6 @@ Route::post('/shops/{shop_id}/setup', [ShopController::class, 'setUp'])
 Route::post('/shops/{shop_id}/teardown', [ShopController::class, 'tearDown'])
     ->name('shop-teardown');
 
-Route::get('/shops/{shop_id}/orders/counts', [OrderController::class, 'getCount'])
-    ->name('get-orders-count');
-
 Route::get('/shipments', [ShipmentController::class, 'get'])
     ->name('get-shipments')
     ->middleware('transform_many_to_json_api');
@@ -40,6 +37,8 @@ Route::post('/callback/shipment-statuses', [ShipmentStatusCallbackController::cl
     ->name('shipment-statuses')
     ->middleware('matching_channel_only:' . config('app.channel'));
 
+Route::get('/orders/counts', [OrderController::class, 'getCount'])
+    ->name('get-orders-count');
 Route::get('/orders/{order_id}', [OrderController::class, 'get'])
     ->name('get-order')
     ->middleware('transform_one_to_json_api');
