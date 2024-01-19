@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class OrdersCountRequest extends FormRequest
 {
+    private const DATE_FORMAT = 'Y-m-d';
+
     public function dateFrom(): Carbon
     {
         $from = $this->query('date_from');
@@ -19,7 +21,7 @@ class OrdersCountRequest extends FormRequest
 
         $this->validateDateFormat($from);
 
-        return Carbon::createFromFormat('Y-m-d', $from);
+        return Carbon::createFromFormat(self::DATE_FORMAT, $from);
     }
 
     public function dateTo(): Carbon
@@ -31,14 +33,14 @@ class OrdersCountRequest extends FormRequest
 
         $this->validateDateFormat($to);
 
-        return Carbon::createFromFormat('Y-m-d', $to);
+        return Carbon::createFromFormat(self::DATE_FORMAT, $to);
     }
 
     private function validateDateFormat(string $date): void
     {
         Validator::validate(
             ['date' => $date],
-            ['date' => 'date_format:Y-m-d'],
+            ['date' => 'date_format:' . self::DATE_FORMAT],
         );
     }
 }
