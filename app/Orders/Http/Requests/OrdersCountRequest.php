@@ -21,7 +21,7 @@ class OrdersCountRequest extends FormRequest
 
         $this->validateDateFormat($from);
 
-        return Carbon::createFromFormat(self::DATE_FORMAT, $from);
+        return $this->toCarbon($from);
     }
 
     public function dateTo(): Carbon
@@ -33,7 +33,7 @@ class OrdersCountRequest extends FormRequest
 
         $this->validateDateFormat($to);
 
-        return Carbon::createFromFormat(self::DATE_FORMAT, $to);
+        return $this->toCarbon($to);
     }
 
     private function validateDateFormat(string $date): void
@@ -42,5 +42,10 @@ class OrdersCountRequest extends FormRequest
             ['date' => $date],
             ['date' => 'date_format:' . self::DATE_FORMAT],
         );
+    }
+
+    private function toCarbon(string $date): Carbon
+    {
+        return Carbon::createFromFormat(self::DATE_FORMAT, $date)->startOfDay();
     }
 }
