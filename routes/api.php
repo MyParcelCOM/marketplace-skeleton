@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Authentication\Http\Controllers\AuthenticationController;
 use App\Orders\Http\Controllers\OrderController;
 use App\Shops\Http\Controllers\ShopController;
 use App\Shipments\Http\Controllers\ShipmentController;
@@ -16,13 +15,6 @@ Route::get('/', fn () => new JsonResponse([
         'status' => 'OK',
     ],
 ]));
-
-Route::prefix('public')->group(function () {
-    Route::post('/init-auth', [AuthenticationController::class, 'init'])
-        ->name('init-auth');
-    Route::get('/authenticate', [AuthenticationController::class, 'authenticate'])
-        ->name('authenticate');
-});
 
 Route::post('/shops/{shop_id}/setup', [ShopController::class, 'setUp'])
     ->name('shop-setup');
