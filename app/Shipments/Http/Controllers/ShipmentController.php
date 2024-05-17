@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shipments\Http\Controllers;
 
-use App\Shipments\Http\Requests\ShipmentRequest;
 use Carbon\Carbon;
-use JetBrains\PhpStorm\ArrayShape;
 use MyParcelCom\Integration\Address;
+use MyParcelCom\Integration\Http\Requests\ShipmentRequest;
 use MyParcelCom\Integration\PhysicalProperties;
 use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Items\Item;
@@ -16,19 +15,18 @@ use MyParcelCom\Integration\Shipment\Shipment;
 
 class ShipmentController
 {
-    #[ArrayShape([
-        'items'         => '\MyParcelCom\Integration\Shipment\Shipment[]',
-        'total_records' => 'int',
-        'total_pages'   => 'int',
-    ])]
+    /**
+     * @return array{
+     *     items: Shipment[],
+     *     total_records: int,
+     *     total_pages: int
+     * }
+     */
     public function get(ShipmentRequest $request): array
     {
         // TODO Shop UUID is always provided and you should use it to distinguish
         // TODO between different auth sessions
         $shopId = $request->shopId();
-
-        // TODO Use the access token to connect to the remote API from where orders are fetched
-        $accessToken = $request->token();
 
         // TODO Use $request->startDate() and $request->endDate() to obtain the request date range for the orders
         $startDate = $request->startDate();

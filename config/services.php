@@ -30,14 +30,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
-    // TODO Rename this configuration key in accordance to the name of the platform being integrated
-    // TODO For example, if the platform is eBay then the key below should be renamed from 'remote' to 'ebay'
-    'remote' => [
-        'oauth2' => [
-            'client_id'     => env('REMOTE_OAUTH2_CLIENT_ID'),
-            'client_secret' => env('REMOTE_OAUTH2_CLIENT_SECRET'),
-            'redirect_uri'  => env('REMOTE_OAUTH2_REDIRECT_URI'),
-        ],
-    ],
 ];
