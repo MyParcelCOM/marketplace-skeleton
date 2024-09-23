@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Shops\Http\Controllers;
 
+use Illuminate\Http\Response;
+use MyParcelCom\Integration\Configuration\Form\Form;
+use MyParcelCom\Integration\Configuration\Http\Requests\ConfigureRequest;
+use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
 use MyParcelCom\Integration\Http\Requests\ShopSetupRequest;
 use MyParcelCom\Integration\Http\Responses\ShopSetupResponse;
 use MyParcelCom\Integration\Http\Responses\ShopTearDownResponse;
@@ -26,5 +30,22 @@ class ShopController
         // TODO: Remove any saved settings for this shop from the database.
 
         return new ShopTearDownResponse();
+    }
+
+    public function getAccountConfigurationSchema(string $shopId): ConfigurationResponse
+    {
+        // TODO: Build a JSON Schema representation of account configuration settings of a Shop
+        //  by instantiating a Form with classes that implement MyParcelCom\Integration\Configuration\Field interface
+
+        $form = new Form(/* Field instances go here */);
+
+        return new ConfigurationResponse($form);
+    }
+
+    public function configureAccount(ConfigureRequest $request, string $shopId): Response
+    {
+        // TODO: Save the shop's account configuration settings
+
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
 }
