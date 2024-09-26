@@ -16,7 +16,6 @@ use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 use MyParcelCom\Integration\Configuration\Values\Value;
 use MyParcelCom\Integration\Configuration\Values\ValueCollection;
-use MyParcelCom\Integration\Http\Requests\FormRequest;
 use MyParcelCom\Integration\Http\Requests\ShopSetupRequest;
 use MyParcelCom\Integration\Http\Responses\ShopSetupResponse;
 use MyParcelCom\Integration\Http\Responses\ShopTearDownResponse;
@@ -41,7 +40,7 @@ class ShopController
         return new ShopTearDownResponse();
     }
 
-    public function getConfiguration(FormRequest $request, string $shopId): ConfigurationResponse
+    public function getConfiguration(string $shopId): ConfigurationResponse
     {
         // TODO: Build a Form of account configuration settings of a Shop
         //  Fetch and include the current setting values
