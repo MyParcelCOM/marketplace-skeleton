@@ -35,5 +35,5 @@ Route::get('/orders/{order_id}', [OrderController::class, 'get'])
     ->name('get-order')
     ->middleware('transform_one_to_json_api');
 
-Route::get('/shops/{shopId}/configuration-schema', [ShopController::class, 'getConfigurationSchema']);
-Route::post('/shops/{shopId}/configure', [ShopController::class, 'configureAccount']);
+Route::get('/shops/{shopId}/configuration', [ShopController::class, 'getConfiguration']);
+Route::post('/shops/{shopId}/configure', [ShopController::class, 'configure']);

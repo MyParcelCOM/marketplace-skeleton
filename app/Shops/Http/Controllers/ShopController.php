@@ -14,6 +14,8 @@ use MyParcelCom\Integration\Configuration\Form\Text;
 use MyParcelCom\Integration\Configuration\Http\Requests\ConfigureRequest;
 use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
+use MyParcelCom\Integration\Configuration\Values\Value;
+use MyParcelCom\Integration\Configuration\Values\ValueCollection;
 use MyParcelCom\Integration\Http\Requests\FormRequest;
 use MyParcelCom\Integration\Http\Requests\ShopSetupRequest;
 use MyParcelCom\Integration\Http\Responses\ShopSetupResponse;
@@ -39,45 +41,49 @@ class ShopController
         return new ShopTearDownResponse();
     }
 
-    public function getConfigurationSchema(FormRequest $request): ConfigurationResponse
+    public function getConfiguration(FormRequest $request, string $shopId): ConfigurationResponse
     {
-        // TODO: Build a JSON Schema representation of account configuration settings of a Shop
-        //  by instantiating a Form with classes that implement MyParcelCom\Integration\Configuration\Field interface
+        // TODO: Build a Form of account configuration settings of a Shop
+        //  Fetch and include the current setting values
 
         // TODO: Fetch the Shop's marketplace settings
-        $shopId = $request->shopId();
 
         // TODO: Build the marketplace settings configuration Form
         $text = new Text(
             name: 'orderPrefix',
-            description: 'a description of the order prefix field goes here',
+            label: 'Order prefix',
             isRequired: true,
-            hint: 'an optional hint for the order prefix field goes here',
+            help: 'an optional hint for the order prefix field goes here',
         );
         $number = new Number(
             name: 'orderNumberPrefix',
-            description: 'a description of the order number prefix field goes here',
+            label: 'Order number prefix',
         );
         $checkbox = new Checkbox(
             name: 'excludeAmazonOrders',
-            description: 'indicates whether orders from Amazon should be excluded from the return portal'
+            label: 'Exclude Amazon orders',
         );
         $select = new Select(
             name: 'defaultShopCurrency',
             type: PropertyType::STRING,
-            description: 'default shop currency',
+            label: 'Default shop currency',
             enum: ['EUR', 'GBP', 'USD'],
         );
         $password = new Password(
             name: 'clientSecret',
-            description: 'client secret',
+            label: 'Client secret',
         );
         $form = new Form($text, $number, $checkbox, $select, $password);
 
-        return new ConfigurationResponse($form);
+        // TODO: Get current setting values from the db and include them in the response
+        $values = new ValueCollection(
+            new Value('orderPrefix', 'myparcelcom_'),
+        );
+
+        return new ConfigurationResponse($form, $values);
     }
 
-    public function configureAccount(ConfigureRequest $request): Response
+    public function configure(ConfigureRequest $request): Response
     {
         // TODO: Save the shop's configuration settings
         $shopId = $request->shopId();
