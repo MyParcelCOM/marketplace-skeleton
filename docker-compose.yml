@@ -7,7 +7,7 @@ services:
           dockerfile: Dockerfile
           args:
               WWWGROUP: '${WWWGROUP}'
-      image: myparcelcom/marketplace-skeleton:v1-dev
+      image: myparcelcom/marketplace-skeleton:v2-dev
       environment:
           WWWUSER: '${WWWUSER}'
           LARAVEL_SAIL: 1
