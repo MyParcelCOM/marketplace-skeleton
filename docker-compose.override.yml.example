@@ -1,5 +1,4 @@
 # Use this file to map ports and other configurations to your services for local development.
-version: '3'
 services:
     marketplace.skeleton:
         ports:
