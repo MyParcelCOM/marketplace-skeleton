@@ -48,6 +48,13 @@ return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR_
                 MyParcelComExceptionHandler::getExceptionHeaders()
             );
         });
+        $exceptions->render(function (Throwable $e) {
+            return response()->json(
+                MyParcelComExceptionHandler::getDefaultExceptionBody($e, config('app.debug')),
+                MyParcelComExceptionHandler::getDefaultExceptionStatus($e),
+                MyParcelComExceptionHandler::getExceptionHeaders()
+            );
+        });
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->use([
