@@ -19,7 +19,10 @@ use MyParcelCom\Integration\Exceptions\Handler as MyParcelComExceptionHandler;
 $app = Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (ValidationException $e) {
-            return response()->json(MyParcelComExceptionHandler::mapValidationException($e));
+            $body = MyParcelComExceptionHandler::getValidationExceptionBody($e);
+            $status = $e->status;
+            $headers = MyParcelComExceptionHandler::getExceptionHeaders();
+            return response()->json($body, $status, $headers);
         });
     })->create();
 
