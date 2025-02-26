@@ -6,7 +6,7 @@ namespace App\Shipments\Http\Controllers;
 
 use Carbon\Carbon;
 use MyParcelCom\Integration\Address;
-use MyParcelCom\Integration\Http\Requests\ShipmentRequest;
+use MyParcelCom\Integration\Shipment\Http\Requests\ShipmentRequest;
 use MyParcelCom\Integration\PhysicalProperties;
 use MyParcelCom\Integration\Price;
 use MyParcelCom\Integration\Shipment\Items\Item;
