@@ -6,7 +6,7 @@ namespace App\Statuses\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
-use MyParcelCom\Integration\Http\Requests\ShipmentStatusCallbackRequest;
+use MyParcelCom\Integration\Shipment\Http\Requests\ShipmentStatusCallbackRequest;
 
 class ShipmentStatusCallbackController
 {
