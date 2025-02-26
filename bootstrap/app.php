@@ -11,9 +11,18 @@ declare(strict_types=1);
 |
 */
 
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Validation\ValidationException;
+use MyParcelCom\Integration\Exceptions\Handler as MyParcelComExceptionHandler;
+
+$app = Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
+    ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (ValidationException $e) {
+            return response()->json(MyParcelComExceptionHandler::mapValidationException($e));
+        });
+    })->create();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +43,6 @@ $app->singleton(
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
-);
-
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    MyParcelCom\Integration\Exceptions\Handler::class
 );
 
 /*
