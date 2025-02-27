@@ -21,7 +21,7 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Validation\ValidationException;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
-use MyParcelCom\Integration\Exceptions\Handler as MyParcelComExceptionHandler;
+use MyParcelCom\Integration\Exceptions\ExceptionMapper;
 use MyParcelCom\Integration\Http\Middleware\MatchingChannelOnly;
 use MyParcelCom\Integration\Http\Middleware\TransformsManyToJsonApi;
 use MyParcelCom\Integration\Http\Middleware\TransformsOneToJsonApi;
@@ -44,16 +44,16 @@ return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR_
         ]);
         $exceptions->render(function (ValidationException $e) {
             return response()->json(
-                MyParcelComExceptionHandler::getValidationExceptionBody($e),
+                ExceptionMapper::getValidationExceptionBody($e),
                 $e->status,
-                MyParcelComExceptionHandler::getExceptionHeaders()
+                ExceptionMapper::getExceptionHeaders()
             );
         });
         $exceptions->render(function (Throwable $e) {
             return response()->json(
-                MyParcelComExceptionHandler::getDefaultExceptionBody($e, config('app.debug')),
-                MyParcelComExceptionHandler::getDefaultExceptionStatus($e),
-                MyParcelComExceptionHandler::getExceptionHeaders()
+                ExceptionMapper::getDefaultExceptionBody($e, config('app.debug')),
+                ExceptionMapper::getDefaultExceptionStatus($e),
+                ExceptionMapper::getExceptionHeaders()
             );
         });
     })
