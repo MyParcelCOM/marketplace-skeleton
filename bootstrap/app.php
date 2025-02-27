@@ -1,15 +1,5 @@
 <?php
 declare(strict_types=1);
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| The first thing we will do is create a new Laravel application instance
-| which serves as the "glue" for all the components of Laravel, and is
-| the IoC container for the system binding all the various parts.
-|
-*/
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
@@ -35,6 +25,17 @@ use MyParcelCom\Integration\Exceptions\Handler as MyParcelComExceptionHandler;
 use MyParcelCom\Integration\Http\Middleware\MatchingChannelOnly;
 use MyParcelCom\Integration\Http\Middleware\TransformsManyToJsonApi;
 use MyParcelCom\Integration\Http\Middleware\TransformsOneToJsonApi;
+
+/*
+|--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| The first thing we will do is create a new Laravel application instance
+| which serves as the "glue" for all the components of Laravel, and is
+| the IoC container for the system binding all the various parts.
+|
+*/
 
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
