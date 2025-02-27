@@ -23,6 +23,7 @@ use Illuminate\Validation\ValidationException;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
 use MyParcelCom\Integration\Exceptions\ExceptionMapper;
 use MyParcelCom\Integration\Http\Middleware\MatchingChannelOnly;
+use MyParcelCom\Integration\Http\Middleware\MiddlewareMapper;
 use MyParcelCom\Integration\Http\Middleware\TransformsManyToJsonApi;
 use MyParcelCom\Integration\Http\Middleware\TransformsOneToJsonApi;
 
@@ -38,52 +39,8 @@ use MyParcelCom\Integration\Http\Middleware\TransformsOneToJsonApi;
 */
 
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
-    ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->dontReport([
-            InvalidArgumentException::class,
-        ]);
-        $exceptions->render(function (ValidationException $e) {
-            return response()->json(
-                ExceptionMapper::getValidationExceptionBody($e),
-                $e->status,
-                ExceptionMapper::getExceptionHeaders()
-            );
-        });
-        $exceptions->render(function (Throwable $e) {
-            return response()->json(
-                ExceptionMapper::getDefaultExceptionBody($e, config('app.debug')),
-                ExceptionMapper::getDefaultExceptionStatus($e),
-                ExceptionMapper::getExceptionHeaders()
-            );
-        });
-    })
-    ->withMiddleware(function (Middleware $middleware) {
-        $middleware->use([
-            TrustProxies::class,
-            HandleCors::class,
-            PreventRequestsDuringMaintenance::class,
-            ValidatePostSize::class,
-            TrimStrings::class,
-            ConvertEmptyStringsToNull::class,
-        ]);
-        $middleware->api([
-            'throttle:api',
-            SubstituteBindings::class,
-        ]);
-        $middleware->alias([
-            'auth'                       => Authenticate::class,
-            'auth.basic'                 => AuthenticateWithBasicAuth::class,
-            'cache.headers'              => SetCacheHeaders::class,
-            'can'                        => Authorize::class,
-            'password.confirm'           => RequirePassword::class,
-            'signed'                     => ValidateSignature::class,
-            'throttle'                   => ThrottleRequests::class,
-            'verified'                   => EnsureEmailIsVerified::class,
-            'transform_many_to_json_api' => TransformsManyToJsonApi::class,
-            'transform_one_to_json_api'  => TransformsOneToJsonApi::class,
-            'matching_channel_only'      => MatchingChannelOnly::class,
-        ]);
-    })
+    ->withExceptions(new ExceptionMapper($_ENV['APP_DEBUG'] ?? false))
+    ->withMiddleware(new MiddlewareMapper())
     ->withCommands([
         Migrate::class
     ])
