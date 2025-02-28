@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Foundation\Application;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
 use MyParcelCom\Integration\Exceptions\ExceptionMapper;
+use MyParcelCom\Integration\Http\Middleware\MiddlewareMapper;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use MyParcelCom\Integration\Exceptions\ExceptionMapper;
 
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
     ->withExceptions(new ExceptionMapper($_ENV['APP_DEBUG'] ?? false))
+    ->withMiddleware(new MiddlewareMapper())
     ->withCommands([
         Migrate::class,
     ])
