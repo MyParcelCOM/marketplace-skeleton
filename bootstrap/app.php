@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
-use MyParcelCom\Integration\Exceptions\ExceptionMapper;
-use MyParcelCom\Integration\Http\Middleware\MiddlewareMapper;
+use MyParcelCom\Integration\Exceptions\DoNotReportExceptions;
+use MyParcelCom\Integration\Exceptions\ExceptionRendering;
+use MyParcelCom\Integration\Http\Middleware\DefaultMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,21 @@ use MyParcelCom\Integration\Http\Middleware\MiddlewareMapper;
 |
 */
 
+$exceptionHandling = new class() {
+    public function __invoke(Exceptions $exceptions): void
+    {
+        $exceptionRendering = new ExceptionRendering($_ENV['APP_DEBUG'] ?? false);
+        $doNotReportExceptions = new DoNotReportExceptions();
+
+        $exceptionRendering($exceptions);
+        $doNotReportExceptions($exceptions);
+    }
+};
+
+$middlewareHandling = new DefaultMiddleware();
+
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
-    ->withExceptions(new ExceptionMapper($_ENV['APP_DEBUG'] ?? false))
-    ->withMiddleware(new MiddlewareMapper())
-    ->withCommands([
-        Migrate::class,
-    ])
+    ->withExceptions($exceptionHandling)
+    ->withMiddleware($middlewareHandling)
+    ->withCommands([Migrate::class])
     ->create();
