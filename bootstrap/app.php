@@ -20,21 +20,9 @@ use MyParcelCom\Integration\Http\Middleware\DefaultMiddleware;
 |
 */
 
-$exceptionHandling = new class() {
-    public function __invoke(Exceptions $exceptions): void
-    {
-        $exceptionRendering = new ExceptionRendering($_ENV['APP_DEBUG'] ?? false);
-        $doNotReportExceptions = new DoNotReportExceptions();
-
-        $exceptionRendering($exceptions);
-        $doNotReportExceptions($exceptions);
-    }
-};
-
-$middlewareHandling = new DefaultMiddleware();
-
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
-    ->withExceptions($exceptionHandling)
-    ->withMiddleware($middlewareHandling)
+    ->withExceptions(new ExceptionRendering($_ENV['APP_DEBUG'] ?? false))
+    ->withExceptions(new DoNotReportExceptions())
+    ->withMiddleware(new DefaultMiddleware())
     ->withCommands([Migrate::class])
     ->create();
