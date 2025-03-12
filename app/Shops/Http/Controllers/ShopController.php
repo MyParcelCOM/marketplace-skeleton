@@ -16,9 +16,9 @@ use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
 use MyParcelCom\Integration\Configuration\Properties\PropertyType;
 use MyParcelCom\Integration\Configuration\Values\Value;
 use MyParcelCom\Integration\Configuration\Values\ValueCollection;
-use MyParcelCom\Integration\Http\Requests\ShopSetupRequest;
-use MyParcelCom\Integration\Http\Responses\ShopSetupResponse;
-use MyParcelCom\Integration\Http\Responses\ShopTearDownResponse;
+use MyParcelCom\Integration\Shop\Http\Requests\ShopSetupRequest;
+use MyParcelCom\Integration\Shop\Http\Responses\ShopSetupResponse;
+use MyParcelCom\Integration\Shop\Http\Responses\ShopTearDownResponse;
 
 class ShopController
 {
