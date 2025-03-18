@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
 use MyParcelCom\Integration\Exceptions\DoNotReportExceptions;
 use MyParcelCom\Integration\Exceptions\ExceptionRendering;
