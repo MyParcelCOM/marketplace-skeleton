@@ -20,7 +20,7 @@ use MyParcelCom\Integration\Http\Middleware\DefaultMiddleware;
 |
 */
 
-$app = Application::configure(basePath: env('APP_BASE_PATH') ?? dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(new ExceptionRendering(env('APP_DEBUG')))
     ->withExceptions(new DoNotReportExceptions())
     ->withMiddleware(new DefaultMiddleware())
