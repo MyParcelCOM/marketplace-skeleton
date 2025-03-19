@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
 use MyParcelCom\ConcurrencySafeMigrations\Commands\Migrate;
 use MyParcelCom\Integration\Exceptions\DoNotReportExceptions;
 use MyParcelCom\Integration\Exceptions\ExceptionRendering;
@@ -20,8 +19,8 @@ use MyParcelCom\Integration\Http\Middleware\DefaultMiddleware;
 |
 */
 
-return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
-    ->withExceptions(new ExceptionRendering($_ENV['APP_DEBUG'] ?? false))
+return Application::configure(basePath: dirname(__DIR__))
+    ->withExceptions(new ExceptionRendering(env('APP_DEBUG') ?? false))
     ->withExceptions(new DoNotReportExceptions())
     ->withMiddleware(new DefaultMiddleware())
     ->withCommands([Migrate::class])

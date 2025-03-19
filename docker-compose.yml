@@ -8,6 +8,7 @@ services:
               WWWGROUP: '${WWWGROUP}'
       image: myparcelcom/marketplace-skeleton:v2-dev
       environment:
+          APP_DEBUG: '${APP_DEBUG}'
           WWWUSER: '${WWWUSER}'
           LARAVEL_SAIL: 1
           XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
