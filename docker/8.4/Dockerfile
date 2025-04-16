@@ -1,4 +1,4 @@
-FROM 478436654351.dkr.ecr.eu-central-1.amazonaws.com/myparcelcom/php:8.3-apache
+FROM 478436654351.dkr.ecr.eu-central-1.amazonaws.com/myparcelcom/php:8.4-apache
 
 COPY . /opt/app
 WORKDIR /opt/app
