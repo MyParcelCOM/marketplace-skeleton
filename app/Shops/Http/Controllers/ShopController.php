@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\Shops\Http\Controllers;
 
-use Illuminate\Http\Response;
-use MyParcelCom\Integration\Configuration\Form\Checkbox;
-use MyParcelCom\Integration\Configuration\Form\Form;
-use MyParcelCom\Integration\Configuration\Form\Number;
-use MyParcelCom\Integration\Configuration\Form\Password;
-use MyParcelCom\Integration\Configuration\Form\Select;
-use MyParcelCom\Integration\Configuration\Form\Text;
 use MyParcelCom\Integration\Configuration\Http\Requests\ConfigureRequest;
 use MyParcelCom\Integration\Configuration\Http\Responses\ConfigurationResponse;
-use MyParcelCom\Integration\Configuration\Properties\PropertyType;
-use MyParcelCom\Integration\Configuration\Values\Value;
-use MyParcelCom\Integration\Configuration\Values\ValueCollection;
 use MyParcelCom\Integration\Shop\Http\Requests\ShopSetupRequest;
 use MyParcelCom\Integration\Shop\Http\Responses\ShopSetupResponse;
 use MyParcelCom\Integration\Shop\Http\Responses\ShopTearDownResponse;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Checkbox;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Form;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Number;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Password;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Select;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Text;
+use MyParcelCom\JsonSchema\FormBuilder\Properties\PropertyType;
+use MyParcelCom\JsonSchema\FormBuilder\Values\Value;
+use MyParcelCom\JsonSchema\FormBuilder\Values\ValueCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class ShopController
 {
@@ -82,10 +82,9 @@ class ShopController
         return new ConfigurationResponse($form, $values);
     }
 
-    public function configure(ConfigureRequest $request): Response
+    public function configure(ConfigureRequest $request, string $shopId): Response
     {
         // TODO: Save the shop's configuration settings
-        $shopId = $request->shopId();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
