@@ -68,9 +68,9 @@ class ShopController
             name: 'default_shop_currency',
             label: 'Default shop currency',
             options: new OptionCollection(
-                new Option('EUR'),
-                new Option('GBP'),
-                new Option('USD')
+                new Option('EUR', 'EUR'),
+                new Option('GBP', 'GBP'),
+                new Option('USD', 'USD'),
             ),
         );
         $password = new Password(
