@@ -17,7 +17,7 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^v2.10.1",
         "myparcelcom/concurrency-safe-migrations": "^0.1",
-        "myparcelcom/marketplace-commons": "^v3.1.0",
+        "myparcelcom/marketplace-commons": "^3.2.0",
         "ramsey/uuid": "^4.7",
         "rollbar/rollbar-laravel": "^8.0",
         "viison/address-splitter": "^0.3.4"
@@ -63,11 +63,8 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_put_contents('.gitignore', str_replace('composer.lock', '', file_get_contents('.gitignore')));\""
         ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ]
     }
 }

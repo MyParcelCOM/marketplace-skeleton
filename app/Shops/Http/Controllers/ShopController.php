@@ -12,10 +12,11 @@ use MyParcelCom\Integration\Shop\Http\Responses\ShopTearDownResponse;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Checkbox;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Form;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Number;
+use MyParcelCom\JsonSchema\FormBuilder\Form\Option;
+use MyParcelCom\JsonSchema\FormBuilder\Form\OptionCollection;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Password;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Select;
 use MyParcelCom\JsonSchema\FormBuilder\Form\Text;
-use MyParcelCom\JsonSchema\FormBuilder\Properties\PropertyType;
 use MyParcelCom\JsonSchema\FormBuilder\Values\Value;
 use MyParcelCom\JsonSchema\FormBuilder\Values\ValueCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,6 +41,7 @@ class ShopController
         return new ShopTearDownResponse();
     }
 
+    // TODO: For further information on how to construct the configuration Form, see the documentation: https://github.com/MyParcelCOM/json-schema-form-builder/blob/master/README.md
     public function getConfiguration(string $shopId): ConfigurationResponse
     {
         // TODO: Build a Form of account configuration settings of a Shop
@@ -49,34 +51,37 @@ class ShopController
 
         // TODO: Build the marketplace settings configuration Form
         $text = new Text(
-            name: 'orderPrefix',
+            name: 'order_prefix',
             label: 'Order prefix',
             isRequired: true,
             help: 'an optional hint for the order prefix field goes here',
         );
         $number = new Number(
-            name: 'orderNumberPrefix',
+            name: 'order_number_prefix',
             label: 'Order number prefix',
         );
         $checkbox = new Checkbox(
-            name: 'excludeAmazonOrders',
+            name: 'exclude_amazon_orders',
             label: 'Exclude Amazon orders',
         );
         $select = new Select(
-            name: 'defaultShopCurrency',
-            type: PropertyType::STRING,
+            name: 'default_shop_currency',
             label: 'Default shop currency',
-            enum: ['EUR', 'GBP', 'USD'],
+            options: new OptionCollection(
+                new Option('EUR', 'EUR'),
+                new Option('GBP', 'GBP'),
+                new Option('USD', 'USD'),
+            ),
         );
         $password = new Password(
-            name: 'clientSecret',
+            name: 'client_secret',
             label: 'Client secret',
         );
         $form = new Form($text, $number, $checkbox, $select, $password);
 
         // TODO: Get current setting values from the db and include them in the response
         $values = new ValueCollection(
-            new Value('orderPrefix', 'myparcelcom_'),
+            new Value('order_prefix', 'myparcelcom_'),
         );
 
         return new ConfigurationResponse($form, $values);
