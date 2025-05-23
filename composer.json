@@ -17,7 +17,7 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^v2.10.1",
         "myparcelcom/concurrency-safe-migrations": "^0.1",
-        "myparcelcom/marketplace-commons": "^3.2.0",
+        "myparcelcom/marketplace-commons": "^4.0.1",
         "ramsey/uuid": "^4.7",
         "rollbar/rollbar-laravel": "^8.0",
         "viison/address-splitter": "^0.3.4"

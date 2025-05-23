@@ -41,20 +41,20 @@ class ShopController
         return new ShopTearDownResponse();
     }
 
-    // TODO: For further information on how to construct the configuration Form, see the documentation: https://github.com/MyParcelCOM/json-schema-form-builder/blob/master/README.md
     public function getConfiguration(string $shopId): ConfigurationResponse
     {
-        // TODO: Build a Form of account configuration settings of a Shop
-        //  Fetch and include the current setting values
-
-        // TODO: Fetch the Shop's marketplace settings
-
-        // TODO: Build the marketplace settings configuration Form
+        // TODO:
+        //  1. Build a Form of account configuration settings of a Shop
+        //  2. Fetch and include the current setting values from the database by populating the `value` property of each field
+        //  3. When applicable and no value is already present, set default values by populating the `value` property of each field
+        //  For further information on how to construct the configuration Form, see the documentation:
+        //   https://github.com/MyParcelCOM/json-schema-form-builder/blob/master/README.md
         $text = new Text(
             name: 'order_prefix',
             label: 'Order prefix',
             isRequired: true,
             help: 'an optional hint for the order prefix field goes here',
+            value: 'my_default_prefix_',
         );
         $number = new Number(
             name: 'order_number_prefix',
@@ -79,17 +79,16 @@ class ShopController
         );
         $form = new Form($text, $number, $checkbox, $select, $password);
 
-        // TODO: Get current setting values from the db and include them in the response
-        $values = new ValueCollection(
-            new Value('order_prefix', 'myparcelcom_'),
-        );
-
-        return new ConfigurationResponse($form, $values);
+        return new ConfigurationResponse($form);
     }
 
     public function configure(ConfigureRequest $request, string $shopId): Response
     {
-        // TODO: Save the shop's configuration settings
+
+        $someShopSetting = $request->getPropertyValue('my_setting');
+        $someNestedShopSetting = $request->getPropertyValue('group.nested_setting');
+
+        // TODO: Save the shop's configuration settings to the database
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
